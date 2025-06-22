@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>iframe preview</title>
+    <meta name="author" content="Richard Liu">
+    <meta name="description"
+        content="This is is a website that you can test can a website be embeded into an iframe tag, also test what will happen after you set the sandbox">
+     <link
+      rel="icon"
+      href="https://w7.pngwing.com/pngs/980/714/png-transparent-computer-icons-code-symbol-coding-miscellaneous-angle-text.png"
+    />
+    <style>
+        body {
+            text-align: center;
+            font-family: arial;
+        }
+
+        #sand,
+        #isAlw {
+            height: 20px;
+            width: 20px;
+        }
+
+        .form {
+            width: 300px;
+            padding: 10px;
+            text-align: left;
+            border: solid black;
+            border-width: 1px;
+        }
+
+        #input,
+        #sandboxDetail {
+            border-color: gray;
+            width: 250px;
+            border-width: 1px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .size {
+            width: 100px;
+            border-width: 1px;
+            border-color: gray;
+        }
+
+        hr {
+            background-color: gray;
+            border: none;
+            height: 2px;
+        }
+
+        #enter {
+            background-color: lightgray;
+            border-width: 1px;
+            border-radius: 3px;
+            width: 53px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Try iframe</h1>
+    <div style="margin:0 auto;width:300px">
+        <p>Before you write code, you can use this website to check can a website be embeded into an iframe tag, also
+            check what will happen after you set the sandbox</p>
+    </div>
+    <div style="display:flex;justify-content: center;align-items:center;">
+        <div class="form">
+            <input placeholder="Enter Website URL" type="url" id="input">
+            <hr>
+            <div style="display:flex;align-items:center">
+                <input type="checkbox" id="sand"> Sandbox
+            </div>
+
+            <div id="sandDetailForm" style="display:none">
+                <br>
+                <input type="text" placeholder="Enter sandbox details" id="sandboxDetail">
+            </div>
+
+            <hr>
+            <input class="size" id="displayWidth" placeholder="width">
+            <input class="size" id="displayHeight" placeholder="height">
+            <hr>
+
+            <button id="enter">Enter</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <iframe id="preview" style="display:none">
+        iframe preview
+    </iframe>
+    <script>
+        document.getElementById("enter").addEventListener("click", function () {
+
+
+
+            if (document.getElementById("sand").checked) {
+                document.getElementById("preview").setAttribute("sandbox", document.getElementById("sandboxDetail").value)
+            } else {
+                document.getElementById("preview").removeAttribute("sandbox")
+            }
+            document.getElementById("preview").style.width = document.getElementById("displayWidth").value;
+            document.getElementById("preview").style.height = document.getElementById("displayHeight").value;
+            document.getElementById("preview").src = document.getElementById("input").value;
+            if (document.getElementById("input").value != "") {
+                document.getElementById("preview").style.display = "revert";
+            } else {
+                alert("The URL input cannot be empty")
+            }
+        });
+        document.getElementById("sand").addEventListener("click", function () {
+            if (document.getElementById("sand").checked) {
+                document.getElementById("sandDetailForm").style.display = "revert";
+
+            } else {
+                document.getElementById("sandboxDetail").value = ""
+                document.getElementById("sandDetailForm").style.display = "none"
+
+            }
+        })
+    </script>
+</body>
+
+</html>
